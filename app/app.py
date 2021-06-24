@@ -1,11 +1,12 @@
-from flask import Flask, request
+import os
+import shutil
 from argparse import ArgumentParser
+from pathlib import Path
+
+from flask import Flask, request
 from mlflow.tracking import MlflowClient
 from waitress import serve
 from werkzeug.utils import secure_filename
-import os
-from pathlib import Path
-import shutil
 
 
 class Application:
@@ -25,9 +26,8 @@ class Application:
                         run_id = request.form['run_id']
                     else:
                         return {'status': 'fail', 'text': 'run_id is not found!'}
-
                     tmp_path = os.path.join(str(Path.home()), "mlflow_artifacts_proxy", run_id)
-                    os.makedirs(tmp_path)
+                    os.makedirs(tmp_path, exist_ok=True)
                     for f in request.files:
                         file = request.files[f]
                         filename = secure_filename(file.filename)

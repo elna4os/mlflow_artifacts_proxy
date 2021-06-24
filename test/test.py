@@ -1,12 +1,14 @@
 import unittest
+
 import requests
-from mlflow.tracking import MlflowClient
 from mlflow.exceptions import RestException
+from mlflow.tracking import MlflowClient
 
 
 class TestMLFlowArtifactsProxy(unittest.TestCase):
     def testLogArtifact(self):
-        with open('artifacts/foo.txt', 'rb') as f1, open('artifacts/image.png', 'rb') as f2, open('artifacts/animation.gif', 'rb') as f3:
+        with open('artifacts/foo.txt', 'rb') as f1, open('artifacts/image.png', 'rb') as f2, open(
+                'artifacts/animation.gif', 'rb') as f3:
             client = MlflowClient(tracking_uri="http://localhost:5000")
             try:
                 experiment_id = client.create_experiment("foo")
