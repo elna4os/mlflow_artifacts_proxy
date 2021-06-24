@@ -1,4 +1,4 @@
-# A proxy for logging MLFlow artifacts to the remote tracking server
+# A tiny Flask-based server for logging artifacts from remote clients
 
 Install dependencies:
 ```
